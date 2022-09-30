@@ -15,7 +15,7 @@ class Server {
   constructor() {
     this.db();
     this.app = this.app;
-    this.port = process.env.PORT!;
+    this.port = process.env.PORT || "4000";
     this.middlewares();
     this.path = {
       home: "/",
