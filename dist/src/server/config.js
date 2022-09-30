@@ -40,7 +40,7 @@ class Server {
         };
         this.db();
         this.app = this.app;
-        this.port = process.env.PORT || 4000;
+        this.port = process.env.PORT || 1337;
         this.middlewares();
         this.path = {
             home: "/",
