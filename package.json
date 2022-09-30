@@ -16,7 +16,7 @@
     "html": "copyfiles --up 1 src/public/*.html dist",
     "dev": "ts-node-dev src/index.ts",
     "build": "tsc && npm run html",
-    "start": "node dist/index.js"
+    "start": "yarn run build && node dist/index.js"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
