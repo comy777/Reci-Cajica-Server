@@ -36,14 +36,14 @@ class Server {
             this.publicFolder();
         };
         this.routes = () => {
-            this.app.use(this.path.cajica, routes_1.default);
+            this.app.use(this.path.home, routes_1.default);
         };
         this.db();
         this.app = this.app;
-        this.port = process.env.PORT;
+        this.port = process.env.PORT || 4000;
         this.middlewares();
         this.path = {
-            cajica: "/",
+            home: "/",
         };
         this.routes();
     }

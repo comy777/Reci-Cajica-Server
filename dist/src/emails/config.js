@@ -12,19 +12,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.appGetRequestUser = void 0;
-const FormUser_1 = __importDefault(require("../models/FormUser"));
-const config_1 = require("../emails/config");
-const appGetRequestUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const data = req.body;
-    const { email } = data;
-    const formUser = new FormUser_1.default(data);
-    yield formUser.save();
-    const resp = yield (0, config_1.sendEmailUser)(email);
-    if (!resp)
-        return res.status(503).send({ error: "Error del servidor" });
-    return res
-        .status(200)
-        .send({ msg: "Su peticion ha sido recibida con exito" });
+exports.sendEmailUser = void 0;
+const nodemailer_1 = __importDefault(require("nodemailer"));
+const transporter = nodemailer_1.default.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD_EMAIL,
+    },
 });
-exports.appGetRequestUser = appGetRequestUser;
+const sendEmailUser = (email) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        yield transporter.sendMail({
+            from: '"Cajica Recicla"',
+            to: email,
+            subject: "Peticion recibida",
+            text: "Nos pondremos en contacto con usted para darle mas informacion al respecto de cajica recicla",
+            html: "<b>Hello world?</b>", // html body
+        });
+        return true;
+    }
+    catch (error) {
+        console.log(error);
+        return;
+    }
+});
+exports.sendEmailUser = sendEmailUser;
