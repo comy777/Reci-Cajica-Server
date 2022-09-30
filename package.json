@@ -13,9 +13,10 @@
   },
   "scripts": {
     "html": "copyfiles --up 1 src/public/* dist",
-    "dev": "ts-node-dev index.ts",
     "build": "tsc && npm run html",
-    "start": "node dist/index.js"
+    "dev": "nodemon dist/index",
+    "start": "node dist/index.js",
+    "postinstall": "tsc"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
