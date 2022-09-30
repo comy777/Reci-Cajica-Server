@@ -13,8 +13,8 @@
     "nodemailer": "^6.8.0"
   },
   "scripts": {
-    "html": "copyfiles --up 1 src/public/* dist",
-    "dev": "ts-node-dev index.ts",
+    "html": "copyfiles --up 1 src/public/*.html dist",
+    "dev": "ts-node-dev src/index.ts",
     "build": "tsc && npm run html",
     "start": "node dist/index.js"
   },
