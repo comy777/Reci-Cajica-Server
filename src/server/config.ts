@@ -7,7 +7,7 @@ import appRoutes from "../routes/routes";
 
 class Server {
   app: Express = express();
-  port: string;
+  port: number;
   path: {
     home: string;
   };
@@ -15,7 +15,7 @@ class Server {
   constructor() {
     this.db();
     this.app = this.app;
-    this.port = process.env.PORT || "4000";
+    this.port = process.env.PORT || 4000;
     this.middlewares();
     this.path = {
       home: "/",
