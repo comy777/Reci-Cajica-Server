@@ -22,6 +22,10 @@ const FormUser = new Schema(
       require: [true, "El correo electronico es requerido"],
       trim: true,
     },
+    file: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true }
 );

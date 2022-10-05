@@ -1,9 +1,11 @@
 import { Router } from "express";
 import { check } from "express-validator";
-import { appGetRequestUser } from "../controllers/app";
+import multer, { memoryStorage } from "multer";
+import { appGetRequestUser, uploadFiles } from "../controllers/app";
 import { validateForm } from "../middlewares/validate";
 
 const appRoutes = Router();
+const upload = multer({ storage: memoryStorage() });
 
 appRoutes.post(
   "",
@@ -14,6 +16,16 @@ appRoutes.post(
     validateForm,
   ],
   appGetRequestUser
+);
+
+appRoutes.put(
+  "/:id",
+  [
+    check("id", "Id no valido").isMongoId(),
+    validateForm,
+    upload.single("file"),
+  ],
+  uploadFiles
 );
 
 export default appRoutes;

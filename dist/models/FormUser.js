@@ -22,5 +22,9 @@ const FormUser = new mongoose_1.Schema({
         require: [true, "El correo electronico es requerido"],
         trim: true,
     },
+    file: {
+        type: String,
+        default: "",
+    },
 }, { timestamps: true });
 exports.default = (0, mongoose_1.model)("form", FormUser);
