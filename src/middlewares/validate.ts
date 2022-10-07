@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
+import { DataAppInterface } from "../interfaces/interfaces";
 
 export const validateForm = (req: Request, res: Response, next: Function) => {
   const errors = validationResult(req);
@@ -10,3 +11,9 @@ export const validateForm = (req: Request, res: Response, next: Function) => {
   }
   next();
 };
+
+export const validateQuery = (value: string) => {
+  const validateData  = ["app", "materials", "card"]
+  if(!validateData.includes(value)) return
+  return true
+}

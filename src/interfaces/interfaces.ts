@@ -3,3 +3,5 @@ export interface Items {
   image: string,
   href: string
 }
+
+export type DataAppInterface = "materials" | "card" | "app" | string

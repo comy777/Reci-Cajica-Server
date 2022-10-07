@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { check } from "express-validator";
+import { check, param } from "express-validator";
 import multer, { memoryStorage } from "multer";
-import { appGetRequestUser, uploadFiles } from "../controllers/app";
-import { validateForm } from "../middlewares/validate";
+import { appGetRequestUser, getDataApp, uploadFiles } from "../controllers/app";
+import { validateForm, validateQuery } from "../middlewares/validate";
 
 const appRoutes = Router();
 const upload = multer({ storage: memoryStorage() });
@@ -26,6 +26,15 @@ appRoutes.put(
     upload.single("file"),
   ],
   uploadFiles
+);
+
+appRoutes.get(
+  "/:q",
+  [
+    param("q", "Peticion no valida").custom(validateQuery),
+    validateForm
+  ],
+  getDataApp
 );
 
 export default appRoutes;

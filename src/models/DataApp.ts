@@ -16,6 +16,6 @@ const DataAppSchema = new Schema({
     default: "",
     trim: true,
   },
-}, {timestamps: true})
+}, {timestamps: true});
 
-export default model("appData", DataAppSchema)
+export default model("appData", DataAppSchema);

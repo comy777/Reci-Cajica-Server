@@ -3,7 +3,10 @@ import { RequestGet } from "../interfaces/request";
 import FormUser from "../models/FormUser";
 import { sendEmailUser } from "../emails/config";
 import { uploadFileFirebase } from "../utils/upload";
-import { validateFormUser } from "../utils/validateModel";
+import { validateDataApp, validateFormUser } from "../utils/validateModel";
+import { DataAppInterface } from "../interfaces/interfaces";
+import DataApp from "../models/DataApp";
+import DataCardImages from "../models/DataCardImages";
 
 export const appGetRequestUser = async (req: Request, res: Response) => {
   try {
@@ -38,3 +41,10 @@ export const uploadFiles = async (req: Request, res: Response) => {
     res.send({ error: "Error del servidor" });
   }
 };
+
+export const getDataApp = async (req: Request, res: Response) => {
+  const {q} = req.params
+  const search : DataAppInterface = q
+  const resp = await validateDataApp(search)
+  return res.send({data: resp})
+}
