@@ -34,7 +34,7 @@ export const uploadFiles = async (req: Request, res: Response) => {
     if (!file) return res.send({ error: "No hay archivos para subir" });
     const resp = await uploadFileFirebase(file);
     if (!resp) return res.send({ error: "Error al subir archivo" });
-    const updateFile = await validateFormUser(id, resp);
+    const updateFile = await validateFormUser(id, resp.id, resp.url);
     if (!updateFile) return res.send({ error: "Error del servidor" });
     return res.send({ msg: "Archivo guardado con exito" });
   } catch (error) {

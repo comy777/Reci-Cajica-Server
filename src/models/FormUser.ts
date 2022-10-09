@@ -25,7 +25,13 @@ const FormUser = new Schema(
     file: {
       type: String,
       default: "",
+      trim: true
     },
+    url: {
+      type: String,
+      default: "",
+      trim: true
+    }
   },
   { timestamps: true }
 );

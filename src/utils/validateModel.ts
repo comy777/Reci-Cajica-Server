@@ -4,11 +4,11 @@ import DataCardImages from "../models/DataCardImages";
 import DataListMaterials from "../models/DataListMaterials";
 import FormUser from "../models/FormUser";
 
-export const validateFormUser = async (id: string, file?: string) => {
+export const validateFormUser = async (id: string, file?: string, url?: string) => {
   const formUser = await FormUser.findById(id);
   if (!formUser) return;
   if (file) {
-    await FormUser.findByIdAndUpdate(id, { file });
+    await FormUser.findByIdAndUpdate(id, { file, url });
   }
   return true;
 };
