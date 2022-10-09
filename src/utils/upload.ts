@@ -23,7 +23,7 @@ const createRef = () => {
 
 export const getUrlFile = async (id: string) => {
   try {
-    const refFile = ref(storageFirebase, id)
+    const refFile = ref(storageFirebase, `uploads/${id}`)
     const resp = await getDownloadURL(refFile)
     return resp
   } catch (error) {
