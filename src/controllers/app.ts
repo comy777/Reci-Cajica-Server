@@ -5,8 +5,6 @@ import { sendEmailUser } from "../emails/config";
 import { uploadFileFirebase } from "../utils/upload";
 import { validateDataApp, validateFormUser } from "../utils/validateModel";
 import { DataAppInterface } from "../interfaces/interfaces";
-import DataApp from "../models/DataApp";
-import DataCardImages from "../models/DataCardImages";
 
 export const appGetRequestUser = async (req: Request, res: Response) => {
   try {
@@ -34,7 +32,7 @@ export const uploadFiles = async (req: Request, res: Response) => {
     if (!file) return res.send({ error: "No hay archivos para subir" });
     const resp = await uploadFileFirebase(file);
     if (!resp) return res.send({ error: "Error al subir archivo" });
-    const updateFile = await validateFormUser(id, resp.id, resp.url);
+    const updateFile = await validateFormUser(id, resp.id, resp.url, resp.originalname);
     if (!updateFile) return res.send({ error: "Error del servidor" });
     return res.send({ msg: "Archivo guardado con exito" });
   } catch (error) {
@@ -43,8 +41,14 @@ export const uploadFiles = async (req: Request, res: Response) => {
 };
 
 export const getDataApp = async (req: Request, res: Response) => {
-  const {q} = req.params
+  const { q } = req.params
   const search : DataAppInterface = q
   const resp = await validateDataApp(search)
   return res.send({data: resp})
+}
+
+export const getAllForms = async (req: Request, res: Response) => {
+  const forms = await FormUser.find({})
+  console.log("here")
+  return res.status(200).send({forms})
 }

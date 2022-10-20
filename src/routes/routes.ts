@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { check, param } from "express-validator";
 import multer, { memoryStorage } from "multer";
-import { appGetRequestUser, getDataApp, uploadFiles } from "../controllers/app";
+import { appGetRequestUser, getAllForms, getDataApp, uploadFiles } from "../controllers/app";
 import { validateForm, validateQuery } from "../middlewares/validate";
 
 const appRoutes = Router();
@@ -36,5 +36,7 @@ appRoutes.get(
   ],
   getDataApp
 );
+
+appRoutes.get("/forms/data", getAllForms);
 
 export default appRoutes;

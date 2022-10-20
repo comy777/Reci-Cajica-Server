@@ -31,6 +31,16 @@ const FormUser = new Schema(
       type: String,
       default: "",
       trim: true
+    },
+    extensionFile: {
+      type: String,
+      default: "",
+      trim: true
+    },
+    originalname: {
+      type: String,
+      default: "",
+      trim: true
     }
   },
   { timestamps: true }

@@ -4,30 +4,38 @@ import { storageFirebase } from "../firebase/config";
 
 export const uploadFileFirebase = async (file: Express.Multer.File) => {
   try {
-    const { refData, id } = createRef();
-    const { buffer } = file;
+    const { buffer, originalname } = file;
+    const extension = getExtensionFile(originalname)
+    const { refData, id } = createRef(extension);
     await uploadBytes(refData, buffer);
-    const url = await getUrlFile(id)
-    return {id, url};
+    const url = await getUrlFile(id, extension)
+    return { id, url, originalname };
   } catch (error) {
     console.log(error);
   }
 };
 
-const createRef = () => {
+const createRef = (extension: string) => {
+  console.log(extension)
   const id = uuid();
-  const refData = ref(storageFirebase, `uploads/${id}`);
+  const refData = ref(storageFirebase, `uploads/${id}.${extension}`);
   return { refData, id };
   
 };
 
-export const getUrlFile = async (id: string) => {
+export const getUrlFile = async (id: string, extension: string) => {
   try {
-    const refFile = ref(storageFirebase, `uploads/${id}`)
+    const refFile = ref(storageFirebase, `uploads/${id}.${extension}`)
     const resp = await getDownloadURL(refFile)
     return resp
   } catch (error) {
     console.log(error)
     return ""
   }
+}
+
+const getExtensionFile = (file : string) => {
+  const nameSplit = file.split(".")
+  const extension = nameSplit[nameSplit.length - 1]
+  return extension
 }
