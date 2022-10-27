@@ -18,7 +18,7 @@ appRoutes.post(
   appGetRequestUser
 );
 
-appRoutes.put(
+appRoutes.post(
   "/:id",
   [
     check("id", "Id no valido").isMongoId(),
