@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateForm = void 0;
+exports.validateQuery = exports.validateForm = void 0;
 const express_validator_1 = require("express-validator");
 const validateForm = (req, res, next) => {
     const errors = (0, express_validator_1.validationResult)(req);
@@ -12,3 +12,10 @@ const validateForm = (req, res, next) => {
     next();
 };
 exports.validateForm = validateForm;
+const validateQuery = (value) => {
+    const validateData = ["app", "materials", "card"];
+    if (!validateData.includes(value))
+        return;
+    return true;
+};
+exports.validateQuery = validateQuery;

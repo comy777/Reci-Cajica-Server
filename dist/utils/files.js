@@ -8,20 +8,31 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-const databaseConnection = () => __awaiter(void 0, void 0, void 0, function* () {
+exports.getAllFilesCludinary = void 0;
+const cloudinary_1 = require("cloudinary");
+cloudinary_1.v2.config({
+    api_key: process.env.API_KEY,
+    cloud_name: process.env.CLOUD_NAME,
+    api_secret: process.env.API_SECRET
+});
+const getAllFilesCludinary = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const uri = process.env.MONGO_URI;
-        yield mongoose_1.default.connect(uri);
-        console.log("Database connected");
+        const resp = yield cloudinary_1.v2.api.resources();
+        const files = resp.resources;
+        const newData = getDataFiles(files);
+        return newData;
     }
     catch (error) {
         console.log(error);
-        throw new Error("Error del servidor");
     }
 });
-exports.default = databaseConnection;
+exports.getAllFilesCludinary = getAllFilesCludinary;
+const getDataFiles = (data) => {
+    const newData = data.map((item, i) => {
+        const { width, height, folder, secure_url } = item;
+        const data = { width, height, folder, secure_url };
+        return data;
+    });
+    return newData;
+};

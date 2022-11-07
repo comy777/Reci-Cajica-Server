@@ -41,4 +41,10 @@ appRoutes.put("/:id", [
     validate_1.validateForm,
     upload.single("file"),
 ], app_1.uploadFiles);
+appRoutes.get("/:q", [
+    (0, express_validator_1.param)("q", "Peticion no valida").custom(validate_1.validateQuery),
+    validate_1.validateForm
+], app_1.getDataApp);
+appRoutes.get("/forms/data", app_1.getAllForms);
+appRoutes.get("/get/files", app_1.getFilesGalery);
 exports.default = appRoutes;

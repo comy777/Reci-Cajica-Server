@@ -12,11 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.uploadFiles = exports.appGetRequestUser = void 0;
+exports.getFilesGalery = exports.getAllForms = exports.getDataApp = exports.uploadFiles = exports.appGetRequestUser = void 0;
 const FormUser_1 = __importDefault(require("../models/FormUser"));
 const config_1 = require("../emails/config");
 const upload_1 = require("../utils/upload");
 const validateModel_1 = require("../utils/validateModel");
+const files_1 = require("../utils/files");
 const appGetRequestUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = req.body;
@@ -48,7 +49,7 @@ const uploadFiles = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const resp = yield (0, upload_1.uploadFileFirebase)(file);
         if (!resp)
             return res.send({ error: "Error al subir archivo" });
-        const updateFile = yield (0, validateModel_1.validateFormUser)(id, resp);
+        const updateFile = yield (0, validateModel_1.validateFormUser)(id, resp.id, resp.url, resp.originalname);
         if (!updateFile)
             return res.send({ error: "Error del servidor" });
         return res.send({ msg: "Archivo guardado con exito" });
@@ -58,3 +59,21 @@ const uploadFiles = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.uploadFiles = uploadFiles;
+const getDataApp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { q } = req.params;
+    const search = q;
+    const resp = yield (0, validateModel_1.validateDataApp)(search);
+    return res.send({ data: resp });
+});
+exports.getDataApp = getDataApp;
+const getAllForms = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const forms = yield FormUser_1.default.find({});
+    console.log("here");
+    return res.status(200).send({ forms });
+});
+exports.getAllForms = getAllForms;
+const getFilesGalery = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const resp = yield (0, files_1.getAllFilesCludinary)();
+    return res.status(200).send({ files: resp });
+});
+exports.getFilesGalery = getFilesGalery;

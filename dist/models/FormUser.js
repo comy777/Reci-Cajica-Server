@@ -25,6 +25,22 @@ const FormUser = new mongoose_1.Schema({
     file: {
         type: String,
         default: "",
+        trim: true
     },
+    url: {
+        type: String,
+        default: "",
+        trim: true
+    },
+    extensionFile: {
+        type: String,
+        default: "",
+        trim: true
+    },
+    originalname: {
+        type: String,
+        default: "",
+        trim: true
+    }
 }, { timestamps: true });
 exports.default = (0, mongoose_1.model)("form", FormUser);
