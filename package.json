@@ -4,11 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "postinstall": "tsc",
     "html": "copyfiles --up 1 src/public/*.html dist",
     "dev": "ts-node-dev src/index.ts",
     "build": " tsc && npm run html",
-    "start": "node dist/index.js",
-    "postinstall": "tsc"
+    "start": "node dist/index.js"
   },
   "dependencies": {
     "cloudinary": "^1.32.0",
