@@ -9,18 +9,17 @@ export const uploadFileFirebase = async (file: Express.Multer.File) => {
     const { refData, id } = createRef(extension);
     await uploadBytes(refData, buffer);
     const url = await getUrlFile(id, extension)
-    return { id, url, originalname };
+    return { id, url, originalname, extension };
   } catch (error) {
     console.log(error);
   }
 };
 
 const createRef = (extension: string) => {
-  console.log(extension)
   const id = uuid();
   const refData = ref(storageFirebase, `uploads/${id}.${extension}`);
   return { refData, id };
-  
+
 };
 
 export const getUrlFile = async (id: string, extension: string) => {
@@ -34,7 +33,7 @@ export const getUrlFile = async (id: string, extension: string) => {
   }
 }
 
-const getExtensionFile = (file : string) => {
+const getExtensionFile = (file: string) => {
   const nameSplit = file.split(".")
   const extension = nameSplit[nameSplit.length - 1]
   return extension

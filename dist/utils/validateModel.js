@@ -17,12 +17,12 @@ const DataApp_1 = __importDefault(require("../models/DataApp"));
 const DataCardImages_1 = __importDefault(require("../models/DataCardImages"));
 const DataListMaterials_1 = __importDefault(require("../models/DataListMaterials"));
 const FormUser_1 = __importDefault(require("../models/FormUser"));
-const validateFormUser = (id, file, url, originalname) => __awaiter(void 0, void 0, void 0, function* () {
+const validateFormUser = (id, file, url, originalname, extensionFile) => __awaiter(void 0, void 0, void 0, function* () {
     const formUser = yield FormUser_1.default.findById(id);
     if (!formUser)
         return;
     if (file) {
-        yield FormUser_1.default.findByIdAndUpdate(id, { file, url, originalname });
+        yield FormUser_1.default.findByIdAndUpdate(id, { file, url, originalname, extensionFile });
     }
     return true;
 });

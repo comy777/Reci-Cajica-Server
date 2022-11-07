@@ -12,12 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getFilesGalery = exports.getAllForms = exports.getDataApp = exports.uploadFiles = exports.appGetRequestUser = void 0;
+exports.getIcon = exports.getFilesGalery = exports.getAllForms = exports.getDataApp = exports.uploadFiles = exports.appGetRequestUser = void 0;
 const FormUser_1 = __importDefault(require("../models/FormUser"));
 const config_1 = require("../emails/config");
 const upload_1 = require("../utils/upload");
 const validateModel_1 = require("../utils/validateModel");
 const files_1 = require("../utils/files");
+const faticon_1 = require("../utils/faticon");
 const appGetRequestUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = req.body;
@@ -49,7 +50,7 @@ const uploadFiles = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const resp = yield (0, upload_1.uploadFileFirebase)(file);
         if (!resp)
             return res.send({ error: "Error al subir archivo" });
-        const updateFile = yield (0, validateModel_1.validateFormUser)(id, resp.id, resp.url, resp.originalname);
+        const updateFile = yield (0, validateModel_1.validateFormUser)(id, resp.id, resp.url, resp.originalname, resp.extension);
         if (!updateFile)
             return res.send({ error: "Error del servidor" });
         return res.send({ msg: "Archivo guardado con exito" });
@@ -77,3 +78,10 @@ const getFilesGalery = (req, res) => __awaiter(void 0, void 0, void 0, function*
     return res.status(200).send({ files: resp });
 });
 exports.getFilesGalery = getFilesGalery;
+const getIcon = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { q } = req.params;
+    console.log(q);
+    const resp = yield (0, faticon_1.getIconFaticon)(q);
+    return res.status(200).send({ icon: 'Obteniendo icono' });
+});
+exports.getIcon = getIcon;

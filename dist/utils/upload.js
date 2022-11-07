@@ -20,7 +20,7 @@ const uploadFileFirebase = (file) => __awaiter(void 0, void 0, void 0, function*
         const { refData, id } = createRef(extension);
         yield (0, storage_1.uploadBytes)(refData, buffer);
         const url = yield (0, exports.getUrlFile)(id, extension);
-        return { id, url, originalname };
+        return { id, url, originalname, extension };
     }
     catch (error) {
         console.log(error);
@@ -28,7 +28,6 @@ const uploadFileFirebase = (file) => __awaiter(void 0, void 0, void 0, function*
 });
 exports.uploadFileFirebase = uploadFileFirebase;
 const createRef = (extension) => {
-    console.log(extension);
     const id = (0, uuid_1.v4)();
     const refData = (0, storage_1.ref)(config_1.storageFirebase, `uploads/${id}.${extension}`);
     return { refData, id };

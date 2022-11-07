@@ -48,3 +48,66 @@ export enum ResourceType {
 export enum Type {
   Upload = "upload",
 }
+export interface FaticonResponse {
+  icon: IconResponseFaticon;
+}
+
+export interface IconResponseFaticon {
+  data: Datum[];
+  metadata: Metadata;
+}
+
+export interface Datum {
+  id: number;
+  description: string;
+  colors: Colors;
+  color: Color;
+  shape: Shape;
+  family_id: number;
+  family_name: string;
+  team_name: TeamName;
+  added: number;
+  pack_id: number;
+  pack_name: string;
+  pack_items: number;
+  tags: string;
+  equivalents: number;
+  images: { [key: string]: string };
+}
+
+export enum Color {
+  Black = "black",
+  Color = "color",
+  Empty = "",
+  Gradient = "gradient",
+}
+
+export enum Colors {
+  Empty = "",
+  Ff0000Ffffff = "FF0000;FFFFFF",
+  Ffff00FfffffC0C0C0Ff0000808080 = "FFFF00;FFFFFF;C0C0C0;FF0000;808080",
+  FfffffC0C0C0 = "FFFFFF;C0C0C0",
+  FfffffFf0000 = "FFFFFF;FF0000",
+  FfffffFf0000C0C0C0 = "FFFFFF;FF0000;C0C0C0",
+  FfffffFf0000C0C0C0000000 = "FFFFFF;FF0000;C0C0C0;000000",
+  The000000 = "000000",
+  The8080800000FfFfffffFf0000 = "808080;0000FF;FFFFFF;FF0000",
+}
+
+export enum Shape {
+  Empty = "",
+  Fill = "fill",
+  LinealColor = "lineal-color",
+  Outline = "outline",
+}
+
+export enum TeamName {
+  Freepik = "Freepik",
+}
+
+export interface Metadata {
+  page: number;
+  count: number;
+  total: number;
+}
+

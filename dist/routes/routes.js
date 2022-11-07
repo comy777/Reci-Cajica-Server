@@ -47,4 +47,5 @@ appRoutes.get("/:q", [
 ], app_1.getDataApp);
 appRoutes.get("/forms/data", app_1.getAllForms);
 appRoutes.get("/get/files", app_1.getFilesGalery);
+appRoutes.get('/get/icon/:q', app_1.getIcon);
 exports.default = appRoutes;

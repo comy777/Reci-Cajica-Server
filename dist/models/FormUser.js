@@ -41,6 +41,11 @@ const FormUser = new mongoose_1.Schema({
         type: String,
         default: "",
         trim: true
+    },
+    icon: {
+        type: String,
+        default: "",
+        tirm: true
     }
 }, { timestamps: true });
 exports.default = (0, mongoose_1.model)("form", FormUser);

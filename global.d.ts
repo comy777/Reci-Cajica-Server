@@ -8,6 +8,8 @@ namespace NodeJS {
     API_KEY: string;
     CLOUD_NAME: string;
     API_SECRET: string;
+    API_FATICON: string;
+    API_FATICON_URL: string;
   }
 }
 

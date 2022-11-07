@@ -41,6 +41,11 @@ const FormUser = new Schema(
       type: String,
       default: "",
       trim: true
+    },
+    icon: {
+      type: String,
+      default: "",
+      tirm: true
     }
   },
   { timestamps: true }
