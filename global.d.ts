@@ -5,6 +5,9 @@ namespace NodeJS {
     MONGO_URI: string;
     PASSWORD_EMAIL: string;
     EMAIL: string;
+    API_KEY: string;
+    CLOUD_NAME: string;
+    API_SECRET: string;
   }
 }
 

@@ -5,6 +5,7 @@ import { sendEmailUser } from "../emails/config";
 import { uploadFileFirebase } from "../utils/upload";
 import { validateDataApp, validateFormUser } from "../utils/validateModel";
 import { DataAppInterface } from "../interfaces/interfaces";
+import { getAllFilesCludinary } from "../utils/files";
 
 export const appGetRequestUser = async (req: Request, res: Response) => {
   try {
@@ -42,13 +43,18 @@ export const uploadFiles = async (req: Request, res: Response) => {
 
 export const getDataApp = async (req: Request, res: Response) => {
   const { q } = req.params
-  const search : DataAppInterface = q
+  const search: DataAppInterface = q
   const resp = await validateDataApp(search)
-  return res.send({data: resp})
+  return res.send({ data: resp })
 }
 
 export const getAllForms = async (req: Request, res: Response) => {
   const forms = await FormUser.find({})
   console.log("here")
-  return res.status(200).send({forms})
+  return res.status(200).send({ forms })
+}
+
+export const getFilesGalery = async (req: Request, res: Response) => {
+  const resp = await getAllFilesCludinary()
+  return res.status(200).send({ files: resp })
 }
