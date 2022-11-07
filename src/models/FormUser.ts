@@ -44,7 +44,7 @@ const FormUser = new Schema(
     },
     icon: {
       type: String,
-      default: "",
+      default: "https://cdn-icons-png.flaticon.com/512/8795/8795907.png",
       tirm: true
     }
   },
