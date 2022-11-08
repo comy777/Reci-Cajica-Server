@@ -34,7 +34,7 @@ const FormUser = new Schema(
     },
     extensionFile: {
       type: String,
-      default: "",
+      default: "png",
       trim: true
     },
     originalname: {
